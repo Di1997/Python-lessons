@@ -1,0 +1,182 @@
+# region Task-1
+# 1. Реализовать функцию, принимающую два числа (позиционные аргументы) и выполняющую их деление. Числа запрашивать у
+# пользователя, предусмотреть обработку ситуации деления на ноль.
+
+
+def div(a: int, b: int) -> int:
+    try:
+        return a // b
+    except ZeroDivisionError:
+        print("Can't divide by 0!")
+        return 0
+
+
+num1 = input("Type first number: ")
+num2 = input("Type second number: ")
+
+if num1.isnumeric() and num2.isnumeric():
+    result = div(int(num1), int(num2))
+
+    if result > 0:
+        print(f"Result is: {result}")
+else:
+    print("Invalid first or second number!")
+
+
+# endregion
+
+# region Task-2
+# 2. Реализовать функцию, принимающую несколько параметров, описывающих данные пользователя: имя, фамилия,
+# год рождения, город проживания, email, телефон. Функция должна принимать параметры как именованные аргументы.
+# Реализовать вывод данных о пользователе одной строкой.
+
+def user_string(**data) -> str:
+    return (
+        f"Name: {data['first_name']} {data['last_name']}; Date of birth: {data['date']}; City: {data['city']}; E-mail: {data['email']}; Phone number: {data['phone_number']}")
+
+
+user_array = []
+user_input = {
+    "first_name": "Input first name: ",
+    "last_name": "Input last name: ",
+    "date": "Input date of birth: ",
+    "city": "Input city: ",
+    "email": "Input Email: ",
+    "phone_number": "Input phone number: ",
+}
+
+while True:
+    user_template = {}
+
+    stop = False
+
+    for key, value in user_input.items():
+        while True:
+            data = input(value)
+
+            if data.lower() == "q":
+                stop = True
+                break
+
+            elif data != "":
+                user_template[key] = data
+                break
+
+        if stop:
+            break
+
+    if not stop:
+        user_array.append(user_string(**user_template))
+
+    if stop:
+        break
+
+for user in user_array:
+    print(user)
+
+
+# endregion
+
+# region Task-3
+# 3. Реализовать функцию my_func(), которая принимает три позиционных аргумента, и возвращает сумму наибольших двух
+# аргументов.
+
+def max_two(a, b, c):
+    number_list = [a, b, c]
+    total = a + b + c
+    max_two_sum = 0
+
+    for num in number_list:
+        two_sum = total - num
+
+        if max_two_sum < two_sum:
+            max_two_sum = two_sum
+
+    return max_two_sum
+
+
+print(max_two(1, 2, 3))
+
+
+# endregion
+
+# region Task-4
+# 4. Программа принимает действительное положительное число x и целое отрицательное число y. Необходимо выполнить
+# возведение числа x в степень y. Задание необходимо реализовать в виде функции my_func(x, y). При решении задания
+# необходимо обойтись без встроенной функции возведения числа в степень. Подсказка: попробуйте решить задачу двумя
+# способами. Первый — возведение в степень с помощью оператора *. Второй — более сложная реализация без оператора *,
+# предусматривающая использование цикла.
+
+def power_simple(a, b):
+    return a ** b
+
+
+def power_complex(a, b):
+    out = a
+    for i in range(b-1):
+        out *= a
+
+    return out
+
+num1 = 5
+num2 = 2
+
+out1 = power_simple(num1, num2)
+out2 = power_complex(num1, num2)
+
+assert out1 == out2
+
+
+# endregion
+
+# region Task-5
+# 5. Программа запрашивает у пользователя строку чисел, разделенных пробелом. При нажатии Enter должна выводиться
+# сумма чисел. Пользователь может продолжить ввод чисел, разделенных пробелом и снова нажать Enter. Сумма вновь
+# введенных чисел будет добавляться к уже подсчитанной сумме. Но если вместо числа вводится специальный символ,
+# выполнение программы завершается. Если специальный символ введен после нескольких чисел, то вначале нужно добавить
+# сумму этих чисел к полученной ранее сумме и после этого завершить программу.
+
+stop_symbol = "Q"
+total = 0
+stop = False
+
+while True:
+    numbers = input(f"Enter multiple numbers, separate by space. Press {stop_symbol} to cancel:\n").split(" ")
+
+    if len(numbers) > 0:
+        for num in numbers:
+            if num.isnumeric():
+                total += int(num)
+            elif num.upper() == stop_symbol:
+                stop = True
+                break
+
+    if stop:
+        print(total)
+        break
+
+    if total > 0:
+        print(total)
+
+# endregion
+
+# region Task-6
+# 6. Реализовать функцию int_func(), принимающую слово из маленьких латинских букв и возвращающую его же,
+# но с прописной первой буквой. Например, print(int_func(‘text’)) -> Text. Продолжить работу над заданием. В
+# программу должна попадать строка из слов, разделенных пробелом. Каждое слово состоит из латинских букв в нижнем
+# регистре. Сделать вывод исходной строки, но каждое слово должно начинаться с заглавной буквы. Необходимо
+# использовать написанную ранее функцию int_func().
+
+
+def int_func(string:str) -> str:
+    return f"{string[0].upper()}{string[1:]}"
+
+data = input("Write any string: ").lower()
+output = []
+
+for string in data.split(" "):
+    output.append(int_func(string))
+
+print(str.join(" ", output))
+
+# endregion
