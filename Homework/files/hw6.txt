@@ -1,4 +1,4 @@
 name;lectures;practicals;lab
-Информатика;100;50;20
-Физика;30;;10
-Физкультура;;30;
+Lesson1;100;50;20
+Lesson2;30;;10
+Lesson3;;30;
