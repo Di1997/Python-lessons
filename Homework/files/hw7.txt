@@ -1,0 +1,4 @@
+name;ownership_type;revenue;cost
+Firm1;OOO;15000;5000
+Firm2;OOP;15000;15000
+Firm3;OOO;15000;20000
