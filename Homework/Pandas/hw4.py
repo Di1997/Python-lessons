@@ -23,10 +23,12 @@ book = pd.DataFrame({
 # Без аттрибута how="inner", так как inner является типом соединения по-умолчанию
 authors_price = pd.merge(authors, book, on="author_id")
 
-authors_grouping = authors_price.groupby("author_name")
-
-authors_stat = pd.DataFrame({
-    "min_price": authors_grouping["price"].max(),
-    "max_price": authors_grouping["price"].min(),
-    "mean_price": authors_grouping["price"].mean()
+authors_stat = authors_price.groupby("author_name").agg({
+    "price": ["min", "max", "mean"]
+}).rename(columns={
+    "min": "min_price",
+    "max": "max_price",
+    "mean": "mean_price"
 })
+
+print(authors_stat)
